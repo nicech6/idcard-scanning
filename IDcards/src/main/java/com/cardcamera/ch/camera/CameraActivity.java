@@ -48,17 +48,17 @@ import butterknife.OnClick;
  */
 public class CameraActivity extends Activity implements SurfaceHolder.Callback, Camera.PreviewCallback {
 
-    @BindView(R.id.surfaceView)
+//    @BindView(R.id.surfaceView)
     SurfaceView mSurfaceView;
-    @BindView(R.id.ig_close_camera_activity)
+//    @BindView(R.id.ig_close_camera_activity)
     ImageView mIgCloseCameraActivity;
-    @BindView(R.id.ig_take_picture_camera_activity)
+//    @BindView(R.id.ig_take_picture_camera_activity)
     ImageView mIgTakePictureCameraActivity;
-    @BindView(R.id.rl_bottom_bar_camera_activity)
+//    @BindView(R.id.rl_bottom_bar_camera_activity)
     RelativeLayout mRlBottomBarCameraActivity;
-    @BindView(R.id.sdv_picture_review_camera_activity)
+//    @BindView(R.id.sdv_picture_review_camera_activity)
     SimpleDraweeView mSdvPreview;
-    @BindView(R.id.tv_top_camera_activity)
+//    @BindView(R.id.tv_top_camera_activity)
     TextView mIdCardType;
     private SurfaceHolder mHolder;
     private Camera mCamera;
@@ -77,10 +77,19 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
         ImagePipelineConfig frescoConfig = ImagePipelineConfig.newBuilder(getApplicationContext()).setDownsampleEnabled(true).build();
         Fresco.initialize(this, frescoConfig);
         setContentView(R.layout.activity_camera);
+        initView();
         ButterKnife.bind(this);
         mHolder = mSurfaceView.getHolder();
         mHolder.addCallback(this);
         initData();
+    }
+    private void initView(){
+        mSurfaceView=findViewById(R.id.surfaceView);
+        mIgCloseCameraActivity=findViewById(R.id.ig_close_camera_activity);
+        mIgTakePictureCameraActivity=findViewById(R.id.ig_take_picture_camera_activity);
+        mRlBottomBarCameraActivity=findViewById(R.id.rl_bottom_bar_camera_activity);
+        mSdvPreview=findViewById(R.id.sdv_picture_review_camera_activity);
+        mIdCardType=findViewById(R.id.tv_top_camera_activity);
     }
 
     private void initData() {
@@ -88,36 +97,36 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
         screenHeight = LibUtils.getScreenHeight(this);
     }
 
-    @OnClick({R.id.ig_close_camera_activity, R.id.ig_take_picture_camera_activity})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.ig_close_camera_activity:
-                if (mResultPath == null) {
-                    //退出
-                    finish();
-                } else {
-                    //正在显示图片，点击重新拍照
-                    LibUtils.deleteFile(this, mResultPath);
-                    mResultPath = null;
-                    starReviewCamera();
-                    mIgTakePictureCameraActivity.setImageResource(R.mipmap.mine_id_ic_camera);
-                    mSdvPreview.setImageURI("");
-                }
-                break;
-            case R.id.ig_take_picture_camera_activity:
-                if (mResultPath == null) {
-                    //拍照
-                    captrue();
-                } else {
-                    //选中该照片
-//                    EventBus.getDefault().post(new CheckIdCardEvent(mResultPath, mIsIdCardFront, mIsOcr));
-                    finish();
-                }
-                break;
-            default:
-                break;
-        }
-    }
+//    @OnClick({R.id.ig_close_camera_activity, R.id.ig_take_picture_camera_activity})
+//    public void onViewClicked(View view) {
+//        switch (view.getId()) {
+//            case R.id.ig_close_camera_activity:
+//                if (mResultPath == null) {
+//                    //退出
+//                    finish();
+//                } else {
+//                    //正在显示图片，点击重新拍照
+//                    LibUtils.deleteFile(this, mResultPath);
+//                    mResultPath = null;
+//                    starReviewCamera();
+//                    mIgTakePictureCameraActivity.setImageResource(R.mipmap.mine_id_ic_camera);
+//                    mSdvPreview.setImageURI("");
+//                }
+//                break;
+//            case R.id.ig_take_picture_camera_activity:
+//                if (mResultPath == null) {
+//                    //拍照
+//                    captrue();
+//                } else {
+//                    //选中该照片
+////                    EventBus.getDefault().post(new CheckIdCardEvent(mResultPath, mIsIdCardFront, mIsOcr));
+//                    finish();
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 
     private void captrue() {
         mCamera.takePicture(null, null, new Camera.PictureCallback() {

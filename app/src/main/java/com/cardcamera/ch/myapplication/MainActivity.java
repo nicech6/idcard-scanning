@@ -1,3 +1,4 @@
+package com.cardcamera.ch.myapplication;
 
 import android.Manifest;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.cardcamera.ch.camera.CameraActivity;
 import com.cardcamera.ch.myapplication.R;
 
 
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onPermissionDenied() {
-
+                                Toast.makeText(MainActivity.this, "--", Toast.LENGTH_SHORT).show();
                             }
                         });
             }
