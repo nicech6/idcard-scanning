@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_picture_review_camera_activity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true" />
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom_bar_camera_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="#b3000000">
+
+        <ImageView
+            android:id="@+id/ig_close_camera_activity"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:src="@mipmap/mine_id_ic_cancel" />
+
+        <ImageView
+            android:id="@+id/ig_take_picture_camera_activity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/mine_id_ic_camera" />
+
+    </RelativeLayout>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/rl_bottom_bar_camera_activity">
+
+        <ImageView
+            android:id="@+id/ig_frame_camera_activity"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/mine_id_icon_frame"
+            app:layout_heightPercent="63%h"
+            app:layout_widthPercent="100%h" />
+
+
+        <TextView
+            android:id="@+id/bg_bottom_camera_activity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ig_frame_camera_activity"
+            android:background="@color/camera_bg" />
+
+        <TextView
+            android:id="@+id/bg_top_camera_activity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ig_frame_camera_activity"
+            android:background="@color/camera_bg" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bg_bottom_camera_activity"
+            android:layout_below="@+id/bg_top_camera_activity"
+            android:layout_toRightOf="@+id/ig_frame_camera_activity"
+            android:background="@color/camera_bg" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bg_bottom_camera_activity"
+            android:layout_below="@+id/bg_top_camera_activity"
+            android:layout_toLeftOf="@+id/ig_frame_camera_activity"
+            android:background="@color/camera_bg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ig_frame_camera_activity"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="注意：请将身份证的四个角与拍摄区域的四个角对齐"
+            android:textColor="@color/default_color_d" />
+
+        <TextView
+            android:id="@+id/tv_top_camera_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ig_frame_camera_activity"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:text="身份证"
+            android:textColor="@color/default_color_d" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <!--<android.support.constraint.ConstraintLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<android.support.constraint.Guideline-->
+    <!--android:id="@+id/guide1"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--app:layout_constraintGuide_percent="0.3" />-->
+
+    <!--<android.support.constraint.Guideline-->
+    <!--android:id="@+id/guide2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--app:layout_constraintGuide_percent="0.6" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_id_card"-->
+    <!--android:layout_width="200dp"-->
+    <!--android:layout_height="30dp"-->
+    <!--android:background="@drawable/shape_rectangle_line"-->
+    <!--app:layout_constraintLeft_toRightOf="@+id/guide1"-->
+    <!--app:layout_constraintTop_toBottomOf="@id/guide2" />-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+</com.zhy.android.percent.support.PercentRelativeLayout>
