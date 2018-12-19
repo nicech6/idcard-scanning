@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.cardcamera.ch.R;
@@ -100,6 +101,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
                 } else {
                     //选中该照片
 //                    EventBus.getDefault().post(new CheckIdCardEvent(mResultPath, mIsIdCardFront, mIsOcr));
+                    Toast.makeText(CameraActivity.this, "" + mResultPath, Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -113,37 +115,6 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
         screenWidth = LibUtils.getScreenWidth(this);
         screenHeight = LibUtils.getScreenHeight(this);
     }
-
-//    @OnClick({R.id.ig_close_camera_activity, R.id.ig_take_picture_camera_activity})
-//    public void onViewClicked(View view) {
-//        switch (view.getId()) {
-//            case R.id.ig_close_camera_activity:
-//                if (mResultPath == null) {
-//                    //退出
-//                    finish();
-//                } else {
-//                    //正在显示图片，点击重新拍照
-//                    LibUtils.deleteFile(this, mResultPath);
-//                    mResultPath = null;
-//                    starReviewCamera();
-//                    mIgTakePictureCameraActivity.setImageResource(R.mipmap.mine_id_ic_camera);
-//                    mSdvPreview.setImageURI("");
-//                }
-//                break;
-//            case R.id.ig_take_picture_camera_activity:
-//                if (mResultPath == null) {
-//                    //拍照
-//                    captrue();
-//                } else {
-//                    //选中该照片
-////                    EventBus.getDefault().post(new CheckIdCardEvent(mResultPath, mIsIdCardFront, mIsOcr));
-//                    finish();
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-//    }
 
     private void captrue() {
         mCamera.takePicture(null, null, new Camera.PictureCallback() {
