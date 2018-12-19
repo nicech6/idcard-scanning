@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (resultCode == 1010) {
             TextView textView = findViewById(R.id.tv);
             textView.setText(data.getExtras().getString("idcard"));
         }
