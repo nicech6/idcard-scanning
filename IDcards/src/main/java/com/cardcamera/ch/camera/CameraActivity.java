@@ -416,6 +416,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
                     @Override
                     public void run() {
                         Log.i("TAG", "" + s);
+                        Intent intent = new Intent();
+                        intent.putExtra("idcard", s);
+                        setResult(1, intent);
+                        finish();
                     }
                 });
             }

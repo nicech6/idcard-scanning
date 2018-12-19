@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cardcamera.ch.camera.CameraActivity;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onPermissionDenied() {
-                                Toast.makeText(MainActivity.this, "--", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "权限被拒绝", Toast.LENGTH_SHORT).show();
                             }
                         });
             }
@@ -49,7 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void ocr() {
         Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            TextView textView = findViewById(R.id.tv);
+            textView.setText(data.getExtras().getString("idcard"));
+        }
     }
 
     @Override
