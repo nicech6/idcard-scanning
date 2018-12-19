@@ -16,7 +16,7 @@
 
     </FrameLayout>
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         android:id="@+id/sdv_picture_review_camera_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

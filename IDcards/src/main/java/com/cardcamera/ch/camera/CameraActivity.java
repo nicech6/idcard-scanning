@@ -29,18 +29,11 @@ import com.cardcamera.ch.utils.LibBitmapUtil;
 import com.cardcamera.ch.utils.LibCalcUtil;
 import com.cardcamera.ch.utils.LibUtils;
 import com.cardcamera.ch.utils.OcrUtils;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.core.ImagePipelineConfig;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 /**
@@ -48,17 +41,11 @@ import butterknife.OnClick;
  */
 public class CameraActivity extends Activity implements SurfaceHolder.Callback, Camera.PreviewCallback {
 
-//    @BindView(R.id.surfaceView)
     SurfaceView mSurfaceView;
-//    @BindView(R.id.ig_close_camera_activity)
     ImageView mIgCloseCameraActivity;
-//    @BindView(R.id.ig_take_picture_camera_activity)
     ImageView mIgTakePictureCameraActivity;
-//    @BindView(R.id.rl_bottom_bar_camera_activity)
     RelativeLayout mRlBottomBarCameraActivity;
-//    @BindView(R.id.sdv_picture_review_camera_activity)
-    SimpleDraweeView mSdvPreview;
-//    @BindView(R.id.tv_top_camera_activity)
+    ImageView mSdvPreview;
     TextView mIdCardType;
     private SurfaceHolder mHolder;
     private Camera mCamera;
@@ -74,22 +61,52 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImagePipelineConfig frescoConfig = ImagePipelineConfig.newBuilder(getApplicationContext()).setDownsampleEnabled(true).build();
-        Fresco.initialize(this, frescoConfig);
         setContentView(R.layout.activity_camera);
         initView();
-        ButterKnife.bind(this);
         mHolder = mSurfaceView.getHolder();
         mHolder.addCallback(this);
         initData();
     }
-    private void initView(){
-        mSurfaceView=findViewById(R.id.surfaceView);
-        mIgCloseCameraActivity=findViewById(R.id.ig_close_camera_activity);
-        mIgTakePictureCameraActivity=findViewById(R.id.ig_take_picture_camera_activity);
-        mRlBottomBarCameraActivity=findViewById(R.id.rl_bottom_bar_camera_activity);
-        mSdvPreview=findViewById(R.id.sdv_picture_review_camera_activity);
-        mIdCardType=findViewById(R.id.tv_top_camera_activity);
+
+    private void initView() {
+        mSurfaceView = findViewById(R.id.surfaceView);
+        mIgCloseCameraActivity = findViewById(R.id.ig_close_camera_activity);
+        mIgTakePictureCameraActivity = findViewById(R.id.ig_take_picture_camera_activity);
+
+        mIgCloseCameraActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mResultPath == null) {
+//                    //退出
+                    finish();
+                } else {
+                    //正在显示图片，点击重新拍照
+                    LibUtils.deleteFile(getApplicationContext(), mResultPath);
+                    mResultPath = null;
+                    starReviewCamera();
+                    mIgTakePictureCameraActivity.setImageResource(R.mipmap.mine_id_ic_camera);
+                    mSdvPreview.setImageBitmap(null);
+                }
+            }
+        });
+        mIgTakePictureCameraActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                if (mResultPath == null) {
+//                    //拍照
+                    captrue();
+                } else {
+                    //选中该照片
+//                    EventBus.getDefault().post(new CheckIdCardEvent(mResultPath, mIsIdCardFront, mIsOcr));
+                    finish();
+                }
+            }
+        });
+        mRlBottomBarCameraActivity = findViewById(R.id.rl_bottom_bar_camera_activity);
+        mSdvPreview = findViewById(R.id.sdv_picture_review_camera_activity);
+        mIdCardType = findViewById(R.id.tv_top_camera_activity);
     }
 
     private void initData() {
